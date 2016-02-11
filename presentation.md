@@ -15,6 +15,8 @@ C'est votre responsabilité en tant que developpeur d'apprendre à utiliser cett
 
 Git est un système de gestion de code source (source code management system).
 
+> Qui a déjà utiliser Dropbox ou Google Drive pour partager du code?
+
 > Quelles sont les principales différences entre Git et SVN? On cherche 4 éléments.
 
 SVN:
@@ -58,7 +60,7 @@ Un fichier peut être dans l'un de ces 4 états:
 
 Un instantané (commit) est un ensemble de snapshots de un ou plusieurs fichiés identifiés par un hash `SHA-1`.
 
-> Quelles sont les différentes métadonnées contenues dans un commit?
+> Quelles sont les différentes métadonnées contenues dans un commit? On cherche 4 éléments.
 
 Un commit contient aussi des métadonnées tel que:
 
@@ -262,11 +264,26 @@ Personnal branches:
 La clé pour ramener les commits des branches topics/personnels, c'est en utilisant les pull request directement sur github.
 Je vais vous expliquer plus en détails lors de la démo.
 
+### SSH keys
+
+Vous allez voir plus loin que je ne vais jamais saisir de mot de passe lorsque je vais communiquer avec Github.
+Pourtant, Github est capable de m'identifier et de m'authentifier. Cela fonctionne grâce à l'usage de clés
+cryptographiques asymétriques RSA public/privé, communiment appellé clés SSH.
+
+Puisque l'installation des outils, la génération des clés et l'usage générique de clés SSH dépasse le contenu
+de cette démonstration, et que les instructions sont entièrement dépendantes de votre système d'exploitation,
+vous devrez chercher comment faire par vous-même. Je reste disponible pour répondre à vos questions.
+
+Voici quelques liens pertinant sur le sujet:
+
+* https://help.github.com/articles/generating-an-ssh-key/
+* https://git-scm.com/book/en/v2/Git-on-the-Server-Generating-Your-SSH-Public-Key
+
 ## Demo
 
 ### Installing Git
 
-    sudo apt-get install git-all
+    sudo apt-get install git
 
 ### Configuring Git
 
@@ -274,7 +291,7 @@ Je vais vous expliquer plus en détails lors de la démo.
 
     git config --global user.name "Patrick Gagnon-Renaud"
     git config --global user.email "coding@pgrenaud.com"
-    git config --global core.editor vim
+    git config --global core.editor gedit  # Notepad++ for Windows
     git config --list
 
 ### Creating a new repository
@@ -288,11 +305,10 @@ Je vais vous expliquer plus en détails lors de la démo.
 
 ### Initial commit
 
-> New commands: `git diff`, `git add <pathspec>`, `git commit`
+> New commands: `git add <pathspec>`, `git commit`
 
     vim README.md
     git status
-    git diff
     git add README.md
     git status
     git commit  # Initial commit.
@@ -300,7 +316,7 @@ Je vais vous expliquer plus en détails lors de la démo.
 
 ### IDE
 
-> New commands: `git diff --check`
+> New commands: `git diff`, `git diff --check`
 
 Tout d'abord, ouvrir l'IDE (ici WebStorm) et créer un nouveau projet dans le répertoire du dépôt.
 
@@ -312,41 +328,44 @@ Configure IDE:
 * Indent using space only
 * No column limit
 * Remove trailing whitespaces
+* Show whitespaces
 
 Vérifier la configuration:
 
+    vim README.md
+    git diff
     git diff --check
 
 ### Gitignore
 
+> New command: `git commit -m <msg>`
+
 > New special file: `.gitignore`
 
     git status
-    wget https://raw.githubusercontent.com/github/gitignore/master/Python.gitignore -O .gitignore
     vim .gitignore
     git status
-    git diff
     git add .gitignore
     git commit -m "Added .gitignore file."
     git status
 
 ### Commit
 
-> New commands: `git diff --cached`, `git commit -m <msg>`
+> New commands: `git show`
 
     vim hello.html  # Basic HTML template with 'Hello World'
     git add hello.html
     git status
-    git diff
-    git diff --cached
     git commit -m "Added hello.html file."
     git status
+    git show
 
 ### Amend
 
-> New commands: `git commit --amend`, `git show`, `git show <object>`
+> New commands: `git diff --cached`, `git commit --amend`, `git show <object>`
 
     vim hello.html  # Add missing '!' to 'Hello World'
+    git diff
     git add hello.html
     git diff --cached
     git commit --amend
@@ -457,9 +476,14 @@ Créer le dépôt sur Github et copier l'adresse du remote.
     git status
     git branch -a
 
-### Commit
+### Merge (fast-forward)
 
     git checkout dev
+    git merge master
+    git tree
+
+### Commit
+
     vim hello.html  # Add <p> inside <header> with wrong indent
     git add hello.html
     git diff --cached
@@ -483,10 +507,12 @@ Créer le dépôt sur Github et copier l'adresse du remote.
 
     vim hello.html  # Add <li> item and fix wrong indent from above
     git add -p hello.html  # Only stash the <li> item
+    git diff
     git diff --cached
     git commit -m "Added second li tag."
+    git show
     git status
-    git stash
+    git stash  # Fix for wrong indent from above
     git status
 
 ### Commit
@@ -498,10 +524,14 @@ Créer le dépôt sur Github et copier l'adresse du remote.
     git status
     git tree
 
-### Commit
+### Pop stash
+
+> New commands: `git stash list`, `git stash pop`
 
     git checkout dev
-    vim hello.html  # Fix <p> inside <header>
+    git stash list
+    git stash pop  # Fix for wrong indent from above
+    git status
     git add hello.html
     git diff --cached
     git commit -m "Fixed p tag."
@@ -523,6 +553,8 @@ Operations:
 ### Squash
 
 > New command: `git rebase -i <commit>`
+
+Dans la commande ci-dessous, l'expression `HEAD^^^` (équivalente à `HEAD~3`) signifie le 3e commit parent du commit présent.
 
     git rebase -i HEAD^^^
     git tree
@@ -581,25 +613,8 @@ Maintenant, je vais revenir en arrière, pour faire comme si nous n'avions jamai
 
     git tag v1.0
     git tree
-    git push
     git push --tags
     git tree
-
-### Pop stash + Reset
-
-> New commands: `git stash list`, `git stash apply`, `git reset --hard`, `git stash pop`
-
-    git checkout dev
-    git merge master
-    git stash list
-    git stash apply
-    git stash list
-    git status
-    git reset --hard HEAD
-    git stash pop
-    git stash list
-    git status
-    git commit -m "Added stuff."
 
 ### Clone
 
