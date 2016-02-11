@@ -257,9 +257,11 @@ Topic branches:
 
 Personnal branches:
 
-* master: Production (release are made here, available for hotfix). Nobody commit here.
-* joe-dev: Dev branch for feature Joe.
-* bob-dev: Dev branch for feature Bob.
+* master: Main branch. Nobody commit here.
+* joe-dev: Dev branch for Joe.
+* bob-dev: Dev branch for Bob.
+
+Vous pouvez désigner un membre de votre équipe qui sera le seul reponsable des merges.
 
 La clé pour ramener les commits des branches topics/personnels, c'est en utilisant les pull request directement sur github.
 Je vais vous expliquer plus en détails lors de la démo.
