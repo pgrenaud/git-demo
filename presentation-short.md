@@ -115,29 +115,6 @@ Merge:
 
 Rebaser (rebase) est le processus qui consiste à prendre les modifications apportés à une branche et les rejouer dans une autre.
 
-> Figure #4
-
-Merge:
-
-1. La branche `master` pointe au commit `C2`
-2. On crée la branche `feature`
-3. On commit `C3`
-4. On checkout la branche `feature`
-5. On commit `C4`
-6. On checkout la branche `master`
-7. On merge la branche `feature` (commit `C5`)
-
-Rebase:
-
-1. La branche `master` pointe au commit `C2`
-2. On crée la branche `feature`
-3. On commit `C3`
-4. On checkout la branche `feature`
-5. On commit `C4`
-6. On rebase la branche `master`
-7. On checkout la branche `master`
-8. On merge la branche `feature` (fast-forward)
-
 ### Remote
 
 Toutes les opérations effectuées jusqu'à maintenant étaient locales.
@@ -146,22 +123,6 @@ Les références distantes (remote references) sont des références (pointeurs)
 Les branches distantes (remote branches) sont des références (pointeurs) vers l’état des branches de dépôts distants.
 
 Le remote `origin` est le nom du remote créé par défaut lors d'un `git clone`.
-
-> Figure #5
-
-Origin:
-
-1. La branche `master` pointe au commit `C2`
-2. Les commits `C3` et `C4` sont ajoutés à `master`
-3. Les commits `C5`, `C6` et `C7` sont ajoutés à `master`
-
-Local:
-
-1. La branche `master` et `origin/master` pointe au commit `C2`
-2. On commit `C5` et `C6`
-3. On récupère (fetch) la branche `origin/master` avec les commits `C3` et `C4`
-4. On merge la branche `origin/master` (commit `C7`)
-5. On pousse (push) la branche `master` vers `origin`
 
 ## Teamwork
 
@@ -242,13 +203,6 @@ Team workflow
 Git étant très flexible, vous pouvez y travailler de mille et une façon. Je vais donc vous proposer un workflow.
 Libre à vous de l'utiliser, de vous en inspirer ou d'utiliser workflow propre à vous.
 
-Structured branches:
-
-* master: Production (release are made here, available for hotfix). Nobody commit here.
-* dev: Complete feature ready for next release. Dev merge here.
-* feature-a: Topic branch for feature A.
-* feature-b: Topic branch for feature B.
-
 Topic branches:
 
 * master: Main branch. Nobody commit here.
@@ -285,7 +239,7 @@ Voici quelques liens pertinant sur le sujet:
 
 ### Installing Git
 
-    sudo apt-get install git
+L'installation de Git varie selon votre système d'exploitation. À vous de consulter la documentation.
 
 ### Configuring Git
 
@@ -503,19 +457,14 @@ Créer le dépôt sur Github et copier l'adresse du remote.
     git status
     git tree
 
-### Patch add + Stash
+### Commit
 
-> New commands: `git add -p <pathspec>`, `git stash`
-
-    vim hello.html  # Add <li> item and fix wrong indent from above
-    git add -p hello.html  # Only stash the <li> item
-    git diff
+    vim hello.html  # Add <li> item
+    git add hello.html
     git diff --cached
     git commit -m "Added second li tag."
-    git show
     git status
-    git stash  # Fix for wrong indent from above
-    git status
+    git tree
 
 ### Commit
 
@@ -526,15 +475,11 @@ Créer le dépôt sur Github et copier l'adresse du remote.
     git status
     git tree
 
-### Pop stash
-
-> New commands: `git stash list`, `git stash pop`
+### Commit
 
     git checkout dev
-    git stash list
-    git stash pop  # Fix for wrong indent from above
     git status
-    git add hello.html
+    git add hello.html  # Fix for wrong indent from above
     git diff --cached
     git commit -m "Fixed p tag."
     git status
@@ -542,32 +487,8 @@ Créer le dépôt sur Github et copier l'adresse du remote.
 
 L'historique a divergé.
 
-### Interactive rebase
+### Merge
 
-Operations:
-
-* Reordering commits
-* Rewording commits
-* Editing (splitting) commits
-* Squashing (fixingup) commits
-* Removing commits
-
-### Squash
-
-> New command: `git rebase -i <commit>`
-
-Dans la commande ci-dessous, l'expression `HEAD^^^` (équivalente à `HEAD~3`) signifie le 3e commit parent du commit présent.
-
-    git rebase -i HEAD^^^
-    git tree
-
-### Rebase
-
-> New command: `git rebase <branch>`
-
-    git checkout feature-list
-    git rebase dev
-    git tree
     git checkout dev
     git merge feature-list
     git tree
@@ -588,26 +509,12 @@ Un pull request fait toujours un merge, même dans les cas où un fast-forward a
 
 > New command: `git pull`
 
+Lorsqu'on effecture l'opération git-pull, git fait en réalité deux chose: un git-fetch suivie d'un git-merge.
+
     git tree
     git checkout master
     git pull
     git tree
-
-### Rollback
-
-Maintenant, je vais revenir en arrière, pour faire comme si nous n'avions jamais fait de `pull`.
-À ne pas faire à la maison! Je fais uniquement ça dans le cadre de la démontration.
-
-    ../git-demo/bin/git-pull-rollback.sh
-
-### Fetch
-
-> New command: `git fetch`
-
-    git tree
-    git checkout master
-    git fetch
-    git merge origin/master
 
 ### Tag
 
