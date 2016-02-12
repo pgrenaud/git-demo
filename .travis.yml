@@ -1,0 +1,11 @@
+language: node_js
+
+node_js:
+    - stable
+
+install:
+    - npm install --global remark remark-lint
+
+script:
+    - remark --frail --no-stdout presentation.md
+    - remark --frail --no-stdout presentation-short.md
