@@ -6,10 +6,11 @@
 
 Pourquoi une démo sur Git?
 
-J'ai vu beaucoup trop de fois des developpeurs (collègues/étudiants) qui n'avaient aucune idée de ce qu'ils faisaient avec git.
-Pour bien des choses, je peux comprendre que vous ne voulez pas vous cassez la tête et vous voulez juste que ça marche.
-Mais git, c'est l'une des choses que vous devez comprendre. Vous devez savoir comment ça fonctionne et comment l'utiliser.
-C'est votre responsabilité en tant que developpeur d'apprendre à utiliser cette outils formadable et essentiel à votre travail.
+J'ai vu beaucoup trop de fois des developpeurs (collègues/étudiants) qui n'avaient aucune idée de ce qu'ils faisaient
+avec git. Pour bien des choses, je peux comprendre que vous ne voulez pas vous cassez la tête et vous voulez juste que
+ça marche. Mais git, c'est l'une des choses que vous devez comprendre. Vous devez savoir comment ça fonctionne et
+comment l'utiliser. C'est votre responsabilité en tant que developpeur d'apprendre à utiliser cette outils formadable
+et essentiel à votre travail.
 
 ### Git vs SVN
 
@@ -69,8 +70,8 @@ Un commit contient aussi des métadonnées tel que:
 * Date et heure
 * Titre/Message
 
-Gardez en tête qu'un commit et son hash est dépendant de toutes ces informations (toutes les modifications et métadonnées).
-Un simple petit changement change le hash complètement.
+Gardez en tête qu'un commit et son hash est dépendant de toutes ces informations (toutes les modifications et
+métadonnées). Un simple petit changement change le hash complètement.
 
 ### Branch
 
@@ -88,7 +89,8 @@ Le `HEAD` est un pointeur spécial pointant vers la branche actuelle.
 
 ### Merge
 
-Lorsque l'historique est séparé, on dit qu'elle a divergé. Il faut donc fusionner pour ramener l'historique en un seul point.
+Lorsque l'historique est séparé, on dit qu'elle a divergé. Il faut donc fusionner pour ramener l'historique en
+un seul point.
 
 Fusionner (merge) est le processus qui consiste à incorporer les modifications apportés à une branche dans une autre.
 
@@ -113,7 +115,8 @@ Merge:
 
 ### Rebase
 
-Rebaser (rebase) est le processus qui consiste à prendre les modifications apportés à une branche et les rejouer dans une autre.
+Rebaser (rebase) est le processus qui consiste à prendre les modifications apportés à une branche et les rejouer
+dans une autre.
 
 ### Remote
 
@@ -131,7 +134,8 @@ Le remote `origin` est le nom du remote créé par défaut lors d'un `git clone`
 Vous travaillez en équipe; vous n'êtes pas seul!
 Vous travailler avec vos collègues et non contre eux.
 
-Vous devez donc faire en sorte que votre travaille complète celui de vos collègues et non qu'il aille à l'encontre de leur travail.
+Vous devez donc faire en sorte que votre travaille complète celui de vos collègues et non qu'il aille à l'encontre
+de leur travail.
 
 ### Warning
 
@@ -164,31 +168,32 @@ Content:
 
 ### Minimal diff policy
 
-Une des raisons pour laquel vous établissez des conventions de code, c'est pour la politique de diff minimal (minimal diff policy).
-Celle-ci consiste à ce que chacun des commits apportent un minimum de changements, ou plutôt, que chaque commit modifie uniquement
-ce dont il a besoin de modifier.
+Une des raisons pour laquel vous établissez des conventions de code, c'est pour la politique de diff minimal
+(minimal diff policy). Celle-ci consiste à ce que chacun des commits apportent un minimum de changements, ou plutôt,
+que chaque commit modifie uniquement ce dont il a besoin de modifier.
 
 **Ne jamais faire de formatage de code dans un commit où l'on apporte des changements de fontionnalités.**
 
-On veut surtout éviter ici qu'il y est des lignes modifié dans votre diff alors que vous n'y avez fait aucun changement, commme
-un ajout éroné de whitespace (voir la section précédente).Si jamais vous voyez qu'il y a un correctif d'indentation à faire
-par exemple, je vais vous montré plus tard comment faire le changement maintenant mais le commit séparément.
+On veut surtout éviter ici qu'il y est des lignes modifié dans votre diff alors que vous n'y avez fait aucun
+changement, commme un ajout éroné de whitespace (voir la section précédente).Si jamais vous voyez qu'il y a
+un correctif d'indentation à faire par exemple, je vais vous montré plus tard comment faire le changement maintenant
+mais le commit séparément.
 
 **C'est pourquoi il est important de toujours consulter le diff avant de faire un commit.**
 
-Prenez toujours le temps de regarder le diff pour voir ce que vous vous apprêté à commit dans le dépôt. C'est rapide à faire,
-c'est un très bon moment pour révisé son code et un bon moyen pour déterminer votre message de commit.
+Prenez toujours le temps de regarder le diff pour voir ce que vous vous apprêté à commit dans le dépôt. C'est rapide
+à faire, c'est un très bon moment pour révisé son code et un bon moyen pour déterminer votre message de commit.
 
 ### Gitignore
 
-Un des apects qui va dans le même sens que la politique de diff minimal et les conventions de code, c'est de ne pas commit
-des fichiers propres à un environement de développement ou à un système spécifique. Par exemple, les fichiers de configuration
-de votre IDE, des fichiers généré par votre système d'exploitation ou encore des fichiers caches/logs généré par votre framework
-sont tous des choses que vous ne voulez jamais commit et voir dans un dépôt.
+Un des apects qui va dans le même sens que la politique de diff minimal et les conventions de code, c'est de ne pas
+commit des fichiers propres à un environement de développement ou à un système spécifique. Par exemple, les fichiers
+de configuration de votre IDE, des fichiers généré par votre système d'exploitation ou encore des fichiers caches/logs
+généré par votre framework sont tous des choses que vous ne voulez jamais commit et voir dans un dépôt.
 
-Pour prévenir cela, on utilise un fichier spécial nommée `.gitignore`. Dans ce fichier, on y indique tous ce qu'on veut que
-git ignore et ne commit pas dans le dépôt. On peut y inscrire des fichiers et répertoire, sous forme relatif ou absolut,
-et même utiliser des regex.
+Pour prévenir cela, on utilise un fichier spécial nommée `.gitignore`. Dans ce fichier, on y indique tous ce qu'on
+veut que git ignore et ne commit pas dans le dépôt. On peut y inscrire des fichiers et répertoire, sous forme relatif
+ou absolut, et même utiliser des regex.
 
 Content:
 
@@ -217,8 +222,8 @@ Personnal branches:
 
 Vous pouvez désigner un membre de votre équipe qui sera le seul reponsable des merges.
 
-La clé pour ramener les commits des branches topics/personnels, c'est en utilisant les pull request directement sur github.
-Je vais vous expliquer plus en détails lors de la démo.
+La clé pour ramener les commits des branches topics/personnels, c'est en utilisant les pull request directement sur
+github. Je vais vous expliquer plus en détails lors de la démo.
 
 ### SSH keys
 
@@ -232,8 +237,8 @@ vous devrez chercher comment faire par vous-même. Je reste disponible pour rép
 
 Voici quelques liens pertinant sur le sujet:
 
-* https://help.github.com/articles/generating-an-ssh-key/
-* https://git-scm.com/book/en/v2/Git-on-the-Server-Generating-Your-SSH-Public-Key
+* <https://help.github.com/articles/generating-an-ssh-key/>
+* <https://git-scm.com/book/en/v2/Git-on-the-Server-Generating-Your-SSH-Public-Key>
 
 ## Demo
 
@@ -250,7 +255,7 @@ L'installation de Git varie selon votre système d'exploitation. À vous de cons
     git config --global core.editor gedit  # Notepad++ for Windows
     git config --list
 
-### Creating a new repository
+### Creating a new repository (local)
 
 > New commands: `git init`, `git status`
 
@@ -270,7 +275,7 @@ L'installation de Git varie selon votre système d'exploitation. À vous de cons
     git commit  # Initial commit.
     git status
 
-### IDE
+### Configuring your IDE
 
 > New commands: `git diff`, `git diff --check`
 
@@ -292,9 +297,9 @@ Vérifier la configuration:
     git diff
     git diff --check
 
-### Gitignore
+### Creating the Gitignore file
 
-> New command: `git commit -m <msg>`
+> New command: `git commit -m <msg>`
 
 > New special file: `.gitignore`
 
@@ -305,7 +310,7 @@ Vérifier la configuration:
     git commit -m "Added .gitignore file."
     git status
 
-### Commit
+### Committing a file (#1)
 
 > New commands: `git show`
 
@@ -316,7 +321,7 @@ Vérifier la configuration:
     git status
     git show
 
-### Amend
+### Amending a commit
 
 > New commands: `git diff --cached`, `git commit --amend`, `git show <object>`
 
@@ -329,7 +334,7 @@ Vérifier la configuration:
     git show HEAD
     git show master
 
-### Viewing history
+### Viewing the commit history
 
 > New commands: `git log`, `git log --stat`, `git log --oneline`
 
@@ -342,7 +347,7 @@ Vérifier la configuration:
     git config --global alias.tree 'log --oneline --graph --decorate --all'
     git tree
 
-### Branch 'dev'
+### Creating a branch (dev)
 
 > New commands: `git branch`, `git branch <branchname>`. `git checkout <branchname>`
 
@@ -353,7 +358,7 @@ Vérifier la configuration:
     git branch
     git status
 
-### Commit
+### Committing a file (#2)
 
     vim hello.html  # Add <header> section
     git add hello.html
@@ -362,7 +367,7 @@ Vérifier la configuration:
     git status
     git tree
 
-### Commit
+### Committing a file (#3)
 
     vim hello.html  # Add <section> section
     git add hello.html
@@ -371,7 +376,7 @@ Vérifier la configuration:
     git status
     git tree
 
-### Branch 'hotfix'
+### Creating a branch (hotfix)
 
 > New command: `git checkout -b <branchname>`
 
@@ -385,7 +390,7 @@ Vérifier la configuration:
     git status
     git tree
 
-### Merge (fast-forward)
+### Merging a branch in fast-forward (hotfix)
 
 > New commands: `git merge <branchname>`, `git branch -d <branchname>`
 
@@ -397,7 +402,7 @@ Vérifier la configuration:
 
 L'historique a divergé.
 
-### Commit
+### Committing a file (#4)
 
     git checkout dev
     vim hello.html  # Add <footer> section
@@ -407,24 +412,24 @@ L'historique a divergé.
     git status
     git tree
 
-### Merge
+### Merging a branch (dev)
 
     git checkout master
     git merge dev
     git tree
 
-### Github
+### Creating a new repository (Github)
 
 Créer le dépôt sur Github et copier l'adresse du remote.
 
-### Remote
+### Adding a remote
 
 > New commands: `git remote add <name> <url>`, `git remote -v`
 
     git remote add origin git@github.com:pgrenaud/demo.git
     git remote -v
 
-### Push
+### Pushing to origin
 
 > New commands: `git push -u <repository> <refspec>`, `git branch -a`
 
@@ -432,13 +437,13 @@ Créer le dépôt sur Github et copier l'adresse du remote.
     git status
     git branch -a
 
-### Merge (fast-forward)
+### Merging a branch in fast-forward (master)
 
     git checkout dev
     git merge master
     git tree
 
-### Commit
+### Committing a file (#5)
 
     vim hello.html  # Add <p> inside <header> with wrong indent
     git add hello.html
@@ -447,9 +452,9 @@ Créer le dépôt sur Github et copier l'adresse du remote.
     git status
     git tree
 
-### Branch 'feature-list'
+### Creating a branch (feature)
 
-    git checkout -b feature-list
+    git checkout -b feature
     vim hello.html  # Add <ul> inside <section>
     git add hello.html
     git diff --cached
@@ -457,7 +462,7 @@ Créer le dépôt sur Github et copier l'adresse du remote.
     git status
     git tree
 
-### Commit
+### Committing a file (#6)
 
     vim hello.html  # Add <li> item
     git add hello.html
@@ -466,7 +471,7 @@ Créer le dépôt sur Github et copier l'adresse du remote.
     git status
     git tree
 
-### Commit
+### Committing a file (#7)
 
     vim hello.html  # Add <li> item
     git add hello.html
@@ -475,7 +480,7 @@ Créer le dépôt sur Github et copier l'adresse du remote.
     git status
     git tree
 
-### Commit
+### Committing a file (#8)
 
     git checkout dev
     git status
@@ -487,17 +492,17 @@ Créer le dépôt sur Github et copier l'adresse du remote.
 
 L'historique a divergé.
 
-### Merge
+### Merging a branch (feature)
 
     git checkout dev
-    git merge feature-list
+    git merge feature
     git tree
-    git branch -d feature-list
+    git branch -d feature
     git push
     git push -u origin dev
     git status
 
-### Pull request (Github)
+### Creating a new pull request (Github)
 
 Créer un nouveau pull request avec la branche `dev`.
 Montrer le processus d'évaluation du code et d'approbation avec thumbs up.
@@ -505,7 +510,7 @@ Approuver et fermer le pull request.
 
 Un pull request fait toujours un merge, même dans les cas où un fast-forward aurait suffit.
 
-### Pull
+### Pulling a branch (master)
 
 > New command: `git pull`
 
@@ -516,7 +521,7 @@ Lorsqu'on effecture l'opération git-pull, git fait en réalité deux chose: un 
     git pull
     git tree
 
-### Tag
+### Tagging a commit
 
 > New commands: `git tag <tagname>`, `git push --tags`
 
@@ -525,7 +530,7 @@ Lorsqu'on effecture l'opération git-pull, git fait en réalité deux chose: un 
     git push --tags
     git tree
 
-### Clone
+### Cloning a repository
 
 > New command: `git clone`
 
@@ -538,6 +543,6 @@ Lorsqu'on effecture l'opération git-pull, git fait en réalité deux chose: un 
 
 ### Resources
 
-* https://git-scm.com/book
-* https://git-scm.com/docs
-* https://help.github.com/
+* <https://git-scm.com/book>
+* <https://git-scm.com/docs>
+* <https://help.github.com/>
