@@ -1,0 +1,11 @@
+{
+  "plugins": {
+    "remark-lint": {
+      "list-item-indent": "space",
+      "maximum-line-length": 120
+    }
+  },
+  "settings": {
+    "commonmark": true
+  }
+}
